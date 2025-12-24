@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/your-username/wordpress-docker.git'
+            }
+        }
+
+        stage('Deploy WordPress') {
+            steps {
+                sh '''
+                docker-compose down
+                docker-compose up -d
+                '''
+            }
+        }
+    }
+}
